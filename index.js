@@ -10,10 +10,16 @@ dotenv.config();
 
 // Create Express app
 const app = express();
+const usersRoutes = require('./routes/users');
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
+
+app.use('/users', usersRoutes);
+
+
+
 
 // Define routes
 app.get('/', (req, res) => {
@@ -24,18 +30,18 @@ app.get('/', (req, res) => {
 
 
 // Start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
 // Use nodemon to automatically restart the server during development
-if (process.env.NODE_ENV === 'development') {
-  nodemon({
-    script: 'index.js',
-    ext: 'js',
-    ignore: ['node_modules/']
-  }).on('restart', () => {
-    console.log('Server restarting...');
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   nodemon({
+//     script: 'index.js',
+//     ext: 'js',
+//     ignore: ['node_modules/']
+//   }).on('restart', () => {
+//     console.log('Server restarting...');
+//   });
+// }
